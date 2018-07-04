@@ -1,0 +1,10 @@
+[flake8]
+application-import-names = wialond
+import-order-style = google
+max-line-length = 120
+
+exclude = __init__.py
+ignore =
+    E131, # continuation line unaligned for hanging indent
+    F403, # unable to detect undefined names (star imports)
+    F405, # may be undefined, or defined from star imports

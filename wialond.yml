@@ -1,0 +1,53 @@
+logging:
+    version: 1
+    rotating: &rotating
+        class: logging.handlers.RotatingFileHandler
+        maxBytes: 8388608
+        backupCount: 5
+        formatter: default
+    formatters:
+        default:
+            format: '%(asctime)s %(levelname)-8s %(name)-15s %(message)s'
+            datefmt: '%Y-%m-%d %H:%M:%S'
+    handlers:
+        default:
+            class: logging.StreamHandler
+            formatter: default
+    loggers:
+        wialond.wialond:
+            handlers: [default]
+            level: INFO
+            propagate: false
+        wialond.connection:
+            handlers: [default]
+            level: INFO
+            propagate: false
+        wialond.position:
+            handlers: [default]
+            level: INFO
+            propagate: false
+
+
+camera:
+    path: rtsp://192.168.1.64
+
+gpsd:
+    address: [127.0.0.1, 2947]
+
+server:
+    address: [127.0.0.1, 6001]
+    cooldown: 5
+
+producers:
+    keep-alive:
+        cooldown: 1
+    position:
+        size: 240
+    picture:
+        cooldown: 1
+        size: 60
+
+consumers:
+    position:
+        deadline: 180
+        distance: 50
